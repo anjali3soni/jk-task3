@@ -1,7 +1,7 @@
 version: '2.11'
 services:
   web:
-    image: anjalisoni12/react-app
+    image: anjalisoni12/react-app-image
     ports:
       - "3000:3000"
     environment:
