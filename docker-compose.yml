@@ -2,6 +2,6 @@ version: '3.8'
 
 services:
   web:
-    image: your-dockerhub-username/your-image:latest
+    image: anjalisoni12/react-app-image:latest
     ports:
       - "80:80"
