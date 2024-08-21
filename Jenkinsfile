@@ -12,7 +12,7 @@ pipeline{
         }
          stage('docker image build'){
             steps{
-               sh 'docker build -t ${DOCKER_IMAGE}  react-deploy/'
+               sh 'docker build -t ${DOCKER_IMAGE} .'
             }
         }
          stage('dockerhub login'){
