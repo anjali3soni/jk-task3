@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage('download code from github'){
             steps{
-                git branch: 'react-app', url: 'https://github.com/anjali3soni/jk-task3.git'
+                git branch: 'main', url: 'https://github.com/anjali3soni/jk-task3.git'
             }
         }
          stage('docker image build'){
