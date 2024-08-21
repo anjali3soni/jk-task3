@@ -5,8 +5,7 @@ FROM node:latest
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY ./web3/src/package.json ./
-COPY package-lock.json ./  
+COPY /src/package.json /
 
 # Install dependencies
 RUN npm install
