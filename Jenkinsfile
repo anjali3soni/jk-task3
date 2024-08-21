@@ -12,7 +12,7 @@ pipeline{
         }
          stage('docker image build'){
             steps{
-               sh 'docker build -t ${DOCKER_IMAGE} .'
+               sh 'docker build -t ${DOCKER_IMAGE} . --no-cache'
             }
         }
          stage('dockerhub login'){
