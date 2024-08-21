@@ -27,7 +27,7 @@ pipeline{
          
         stage('docker compose update'){
             steps{
-               sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' react-deploy/docker-compose.yml"
+               sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' /var/lib/jenkins/jk-t3/web3/docker-compose.yml"
             }
         }
          stage('deploy'){
