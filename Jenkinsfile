@@ -12,7 +12,7 @@ pipeline{
         }
          stage('docker image build'){
             steps{
-               sh 'docker build -t ${DOCKER_IMAGE} . -f /var/lib/jenkins/jk-t3/web3/Dockerfile'
+               sh 'docker build -t ${DOCKER_IMAGE} . -f /var/lib/jenkins/workspace/jk-t3/web3/Dockerfile'
             }
         }
          stage('dockerhub login'){
@@ -27,7 +27,7 @@ pipeline{
          
         stage('docker compose update'){
             steps{
-               sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' /var/lib/jenkins/jk-t3/web3/docker-compose.yml"
+               sh "sed -i 's|image: .*|image: ${DOCKER_IMAGE}|' /var/lib/jenkins/workspace/jk-t3/web3/docker-compose.yml"
             }
         }
          stage('deploy'){
