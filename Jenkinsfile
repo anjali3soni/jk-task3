@@ -12,7 +12,7 @@ pipeline{
         }
          stage('docker image build'){
             steps{
-               sh 'docker build -t ${DOCKER_IMAGE} -f /var/lib/jenkins/workspace/jk-t3/web3/Dockerfile .'
+               sh 'docker build -t ${DOCKER_IMAGE} .'
             }
         }
          stage('dockerhub login'){
