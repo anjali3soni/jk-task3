@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "anjalisoni12/react-app-image:${BUILD_NUMBER}"
+        SLACK_USER_ID = 'U07CB5WDYVB' 
+        SLACK_CREDENTIALS_ID = 'slack-bot'
     }
 
     stages {
@@ -48,6 +50,40 @@ pipeline {
                    docker-compose -f /var/lib/jenkins/workspace/jk-t3/web3/docker-compose.yml up -d
                 """
             }
+        }
+    }
+    post {
+        failure {
+            // Send Slack notification on failure
+            slackSend (
+                channel: "${SLACK_USER_ID}",  // Send notification to the Slack user ID
+                color: 'danger',
+                message: """
+                    *Deployment Pipeline Failed!*
+                    
+                    *Job:* ${env.JOB_NAME}
+                    *Build Number:* ${env.BUILD_NUMBER}
+                    *Build URL:* ${env.BUILD_URL}
+                    *Failure Reason:* ${currentBuild.description}
+                """,
+                tokenCredentialId: "${SLACK_CREDENTIALS_ID}"
+            )
+        }
+
+        success {
+            // Send Slack notification on success
+            slackSend (
+                channel: "${SLACK_USER_ID}",  // Send notification to the Slack user ID
+                color: 'good',
+                message: """
+                    *Deployment Pipeline Succeeded!*
+                    
+                    *Job:* ${env.JOB_NAME}
+                    *Build Number:* ${env.BUILD_NUMBER}
+                    *Build URL:* ${env.BUILD_URL}
+                """,
+                tokenCredentialId: "${SLACK_CREDENTIALS_ID}"
+            )
         }
     }
 }
