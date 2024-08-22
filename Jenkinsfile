@@ -38,16 +38,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
-                  def dockerComposePath = '/usr/local/bin/docker-compose'
-                  if (fileExists(dockerComposePath)) {
                   sh """
-                   ${dockerComposePath} -f /var/lib/jenkins/workspace/jk-t3/web3/docker-compose.yml up -d
+                   docker-compose -f /var/lib/jenkins/workspace/jk-t3/web3/docker-compose.yml up -d
                   """
-                } 
-                else {
-                   error 'Docker Compose not found at ${dockerComposePath}'
-                }
         }
     }
 }
