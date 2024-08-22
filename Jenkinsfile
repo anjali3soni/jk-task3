@@ -1,14 +1,17 @@
 pipeline {
     agent any
+
     environment {
         DOCKER_IMAGE = "anjalisoni12/react-app-image:${BUILD_NUMBER}"
     }
+
     stages {
         stage('Download Code from GitHub') {
             steps {
                 git branch: 'main', url: 'https://github.com/anjali3soni/jk-task3.git'
             }
         }
+
         stage('Docker Image Build') {
             steps {
                 sh """
@@ -16,6 +19,7 @@ pipeline {
                 """
             }
         }
+
         stage('DockerHub Login') {
             steps {
                 script {
@@ -28,6 +32,7 @@ pipeline {
                 }
             }
         }
+
         stage('Docker Compose Update') {
             steps {
                 sh """
@@ -36,13 +41,13 @@ pipeline {
                 """
             }
         }
+
         stage('Deploy') {
             steps {
-                  sh """
+                sh """
                    docker-compose -f /var/lib/jenkins/workspace/jk-t3/web3/docker-compose.yml up -d
-                  """
+                """
+            }
         }
-    }
-}
     }
 }
